@@ -65,7 +65,6 @@ class ParaphraseGPT(nn.Module):
     """
 
     'Takes a batch of sentences and produces embeddings for them.'
-    ### YOUR CODE HERE
     last_hidden = self.gpt(input_ids, attention_mask)["last_token"]
     last_droped = self.paraphrase_dropout(last_hidden)
     logits = self.paraphrase_detection_head(last_droped)

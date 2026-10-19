@@ -155,54 +155,6 @@ def sonnets_eval(generated, gold, held_out):
 
     return float(chrf_score.score)
 
-
-# Previous implementation i did, unused
-from collections import Counter
-import warnings
-def compute_chrf(held_out_reference, hypothesis, reference, beta=1):
-  """Computes CHRF score (https://aclanthology.org/anthology-files/pdf/W/W15/W15-3049.pdf)
-  for the predicted continuation against a gold reference"""
-
-  # Remove initial reference from chrf score
-  hypothesis = hypothesis[len(held_out_reference):]
-  reference = reference[len(held_out_reference):]
-
-  if not hypothesis:
-    return 0.0
-
-  precision = 0.
-  recall = 0.
-  for n in range(1, 7):
-
-    hyp_n_grams = [hypothesis[i:i+n] for i in range(len(hypothesis) - n + 1)]
-    ref_n_grams = [reference[i:i+n] for i in range(len(reference) - n + 1)]
-
-    if not hyp_n_grams or not ref_n_grams:
-            msg = f"""Couldnt extract {n}-grams for hypothesis: 
-            {hypothesis} 
-            and reference: 
-            {reference}."""
-            warnings.warn(msg)
-            continue
-    
-    hyp_counts = Counter(hyp_n_grams)
-    ref_counts = Counter(ref_n_grams)
-
-    matches = sum(min(hyp_counts[gram], ref_counts[gram]) for gram in hyp_counts)
-    precision += matches / len(hyp_n_grams)
-    recall += matches / len(ref_n_grams)
-
-  # Return 0 if no overlap at all
-  if precision + recall == 0:
-    return 0.0
-
-  precision /= 6
-  recall /= 6
-  chrf = (1 + beta**2) * precision * recall / (beta**2 * precision + recall)
-
-  return chrf
-
-
 def plot_training(train_loss, dev_metric, metric_name, plot_path):
 
   best_epoch = np.argmax(dev_metric)

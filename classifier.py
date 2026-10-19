@@ -44,8 +44,6 @@ class GPT2SentimentClassifier(torch.nn.Module):
     self.num_labels = args.num_labels
     self.gpt = GPT2Model.from_pretrained(model=args.model_size, d=args.d, l=args.l, num_heads=args.num_heads)
 
-    ### TODO: Create any instance variables you need to classify the sentiment of BERT embeddings.
-    ### YOUR CODE HERE
     self.dropout = torch.nn.Dropout(args.hidden_dropout_prob)
     self.projection = torch.nn.Linear(args.d, args.num_labels)
     
@@ -54,11 +52,6 @@ class GPT2SentimentClassifier(torch.nn.Module):
 
   def forward(self, input_ids, attention_mask):
     '''Takes a batch of sentences and returns logits for sentiment classes'''
-
-    ### TODO: The final GPT contextualized embedding is the hidden state of the last token.
-    ###       HINT: You should consider what is an appropriate return value given that
-    ###       the training loop currently uses F.cross_entropy as the loss function.
-    ### YOUR CODE HERE
 
     last_hidden = self.gpt(input_ids, attention_mask)["last_token"]
     last_droped = self.dropout(last_hidden)

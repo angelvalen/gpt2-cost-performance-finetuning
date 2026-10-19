@@ -54,7 +54,6 @@ class SonnetGPT(nn.Module):
     not just the last token! This will allow our model to learn the natural language distribution that composes sonnets,
     not just the distribution over next tokens for the last token!
     """
-    ### YOUR CODE HERE
     output = self.gpt(input_ids, attention_mask, kv_cache)
     last_hidden_states = output["last_hidden_state"]
     logits = self.gpt.hidden_state_to_token(last_hidden_states)
@@ -70,11 +69,6 @@ class SonnetGPT(nn.Module):
   def generate_top_p(self, encoding, temperature=0.7, top_p=0.9, max_length=128): 
     """
     Generates an original sonnet using top-p sampling and softmax temperature.
-
-    TODO: this is probably not ideal. You can look at hugging face's model.generate(...) function for inspiration.
-    In particular, generating multiple sequences and choosing the best with beam search is one avenue. Top_k is another;
-    there are many.
-
     Expects encoding.shape = (batch_size==1, seq_len)
     """
     token_ids = encoding.to(self.get_device())

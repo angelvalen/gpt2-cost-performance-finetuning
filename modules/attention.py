@@ -33,7 +33,6 @@ class CausalSelfAttention(nn.Module):
 
   def attention(self, key, query, value, attention_mask):
 
-    ### YOUR CODE HERE
     d_k = self.attention_head_size
     att_score = torch.matmul(query, key.transpose(-1, -2)) / torch.sqrt(torch.tensor(d_k, dtype=float, device=key.device))
 

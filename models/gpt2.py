@@ -51,9 +51,6 @@ class GPT2Model(GPTPreTrainedModel):
     input_shape = input_ids.size()
     seq_length = input_shape[1]
 
-    ### TODO: Use pos_ids to get position embedding from self.pos_embedding into pos_embeds.
-    ###       Then, add two embeddings together; then apply dropout and return.
-    ### YOUR CODE HERE
     if is_kv_cached:
       pos_ids = self.position_ids[:, seq_length - 1:seq_length]
       input_ids = input_ids[:, -1:]
@@ -119,7 +116,6 @@ class GPT2Model(GPTPreTrainedModel):
 
       return hidden_state(s) * E^T
     """
-    ### YOUR CODE HERE
     # (V, D) @ (B, T, D, 1) = (B, T, V, 1) -> (B, T, V)
     logits = torch.matmul(self.word_embedding.weight, hidden_state.unsqueeze(-1)).squeeze(-1)
     return logits

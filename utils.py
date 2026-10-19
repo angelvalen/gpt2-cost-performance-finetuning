@@ -450,6 +450,3 @@ def get_trainable_params(model, args):
   args.trainable_params = trainable
   args.total_params = total
 
-
-def parse_common_arguments(parser):
-  raise NotImplementedError
