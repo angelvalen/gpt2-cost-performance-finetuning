@@ -174,4 +174,4 @@ Released under the [Apache License 2.0](LICENSE). This repository contains code 
 
 ## Author
 
-Ángel Valencia Padilla · [GitHub](https://github.com/angelvalen) · [LinkedIn](linkedin.com/in/angelvalenciapadilla) · angelvalenciabusiness@gmail.com
+Ángel Valencia Padilla · [GitHub](https://github.com/angelvalen) · [LinkedIn](https://linkedin.com/in/angelvalenciapadilla) · angelvalenciabusiness@gmail.com
